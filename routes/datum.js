@@ -9,4 +9,4 @@ const {Adminvalidation}=require("../utils/verifytoken")
   router.delete("/deletemail/:id",Adminvalidation,deletemail)
  
 
-  module.exports=router;
+  module.exports=router; 

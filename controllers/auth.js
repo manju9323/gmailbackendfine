@@ -110,4 +110,4 @@ res.cookie("access_token",token,{httpOnly:true}).status(200).send({otherDetails}
 
 
 
-module.exports={register,login,logout}
+module.exports={register,login,logout} 

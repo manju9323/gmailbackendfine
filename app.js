@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended:true})); 
 
-
+app.get('/api',(req,res)=>{res.send("welcome")})
 app.use('/api/compose',composemail)
 app.use('/api/auth',auth)
 app.use('/api/data',datum)
