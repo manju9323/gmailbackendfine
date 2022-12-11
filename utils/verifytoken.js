@@ -4,16 +4,18 @@ const jwt =require("jsonwebtoken");
 exports.Adminvalidation=(req,res,next)=>{
  // var token =req.cookies
   //var token=req.header("mm")
-  let token=req.header("mm") 
-  req.token=token;
+  let token=req.header("mm")
   
-  jwt.verify(req.token,process.env.secure,async(err,data)=>{
+  jwt.verify(token,process.env.secure,(err,data)=>{
     if(err){
-     res.send("invalid authentication")
+        res.send("invalid authentication")
     }
-    else{(next())} 
-  }
-  )
-
+    else{
+      
+      req.token=data;
+      next();
+      //return res.send(200,req.token._id)} 
+  }})
+   
     }; 
         

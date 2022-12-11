@@ -7,4 +7,4 @@ const {compose }= require("../controllers/compose");
 router.post("/mail",Adminvalidation,compose)
 
 
-module.exports=router 
+module.exports=router

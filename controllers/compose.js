@@ -3,14 +3,14 @@ const Composeemail =require("../models/compose")
 
 
 compose=(async(req,res)=>{
-
     const {email,subject,message} = req.body;
-   
-
+  // console.log({email,subject,message,comid:req.token._id,isAdmin:req.token.isAdmin})
     const newcompose= new Composeemail({
         email:email,
         subject:subject,
-        html:message, 
+        html:message,
+        comid:req.token._id,
+
     })
     await newcompose.save()
 
@@ -23,7 +23,7 @@ compose=(async(req,res)=>{
             user:"manjugopi610@gmail.com", 
         pass:'gasclvpnsuhezlzx'
         }
-    }); 
+    });
     //----------modal----------------------
 
     //------------nodemailer------------------
@@ -31,9 +31,9 @@ compose=(async(req,res)=>{
         from:"manjugopi610@gmail.com",
      to:newcompose.email,
      subject:newcompose.subject,
-     html:newcompose.html,
+     html:newcompose.html, 
     } 
-   // console.log(mailercontent) 
+    console.log(mailercontent) 
 
    sender.sendMail( mailercontent ,
     (error,body)=>{

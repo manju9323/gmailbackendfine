@@ -12,6 +12,10 @@ const composeschema=new mongoose.Schema({
     html:{
         type:String,
     },
+    comid:{
+        type:String,
+        required:true,
+    },
    
 },
 {timestamps:true});   

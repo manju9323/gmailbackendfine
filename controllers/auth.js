@@ -41,7 +41,7 @@ try{
         const validUser=await bcrypt.compare(payload.password,user.password);
         if(validUser)
         {
-            const token = jwt.sign({_id:user._id},process.env.secure);
+            const token = jwt.sign({_id:user._id,isAdmin:user.isAdmin},process.env.secure);
        //*  res.cookie("mm",token,{expire:new Date() +9999});
         //  res.header("mm",token,{expire:new Date() +9999});
         res.header("mm",token).json(token);
@@ -49,7 +49,7 @@ try{
        //    return res.status(200).json({token,user:{_id,email,name}});
  
         }
-        else{  
+        else{   
             return res.status(400).json({
                 err:"invalid user/password" 
             });
@@ -75,16 +75,13 @@ login=async(req,res,next)=>{
         const user=await User.findOne({username:req.body.username})
         if(!user)
         return res.send("error username")
-
         const isPasswordCorrect=await bcrypt.compare(req.body.password,user.password)
         if(!isPasswordCorrect)
         return res.send("password wrong")
-
         //usingjwt for login person is admin or not
         const token=jwt.sign({_id:user._id}, 
             process.env.jwt)
  
-
         const{password,isAdmin,...otherDetails}=user._doc;
   
     
@@ -92,9 +89,7 @@ res.cookie("access_token",token,{httpOnly:true}).status(200).send({otherDetails}
     }
     catch(err){       
         res.send("err")
-
     }
-
 }  
 */
 //logout
@@ -110,4 +105,4 @@ res.cookie("access_token",token,{httpOnly:true}).status(200).send({otherDetails}
 
 
 
-module.exports={register,login,logout} 
+module.exports={register,login,logout}
